@@ -1,0 +1,40 @@
+import time
+import random
+
+class Emulsion:
+    def __init__(self, pfc_volume, emulsifier_volume):
+        self.pfc_volume = pfc_volume
+        self.emulsifier_volume = emulsifier_volume
+        self.is_stable = False
+
+    def mix(self, speed, duration, temperature):
+        print(f"Starting the mixing process with speed: {speed} RPM, duration: {duration} seconds, temperature: {temperature}°C")
+        time.sleep(duration)
+        
+        # Simulate stability based on conditions
+        stability_factor = (speed * duration) / (temperature + random.uniform(0.1, 1.0))
+        
+        if stability_factor > 5000:
+            self.is_stable = True
+        else:
+            self.is_stable = False
+
+        return self.is_stable
+
+def main():
+    pfc_volume = 100  # mL
+    emulsifier_volume = 10  # mL
+    mixing_speed = 2000  # RPM
+    mixing_duration = 300  # seconds
+    mixing_temperature = 25  # °C
+
+    emulsion = Emulsion(pfc_volume, emulsifier_volume)
+    stability = emulsion.mix(mixing_speed, mixing_duration, mixing_temperature)
+    
+    if stability:
+        print("The emulsion is stable.")
+    else:
+        print("The emulsion is not stable. Please adjust the parameters and try again.")
+
+if __name__ == "__main__":
+    main()
